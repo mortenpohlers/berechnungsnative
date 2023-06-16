@@ -1,0 +1,9 @@
+[SHARED_LIB]
+libmult.so
+
+[HEADER]
+libmult.h
+graal_isolate.h
+libmult_dynamic.h
+graal_isolate_dynamic.h
+

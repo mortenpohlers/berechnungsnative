@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>berechnungsnative</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>berechnungsnative</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <oniondemo-core.version>0.0.2-SNAPSHOT</oniondemo-core.version>
+        <jackson-dataformat-xml.version>2.15.1</jackson-dataformat-xml.version>
+        <jackson-datatype-jsr310.version>2.15.1</jackson-datatype-jsr310.version>
+        <native-image-maven-plugin.version>20.3.9</native-image-maven-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.gothaer.glsla</groupId>
+            <artifactId>oniondemo-core</artifactId>
+            <version>${oniondemo-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>${jackson-dataformat-xml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-datatype-jsr310.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.graalvm.nativeimage</groupId>
+                <artifactId>native-image-maven-plugin</artifactId>
+                <version>${native-image-maven-plugin.version}</version>
+                <configuration>
+                    <outputDirectory>
+                        ${project.basedir}/src/main/C/
+                    </outputDirectory>
+                    <buildArgs>
+                        --shared -H:Name=libmult --initialize-at-build-time=com.fasterxml.jackson.annotation.JsonProperty$Access
+                    </buildArgs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>native-image</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,32 @@
+
+[
+  {
+    "name" : "java.lang.Class",
+    "queryAllDeclaredConstructors" : true,
+    "queryAllPublicConstructors" : true,
+    "queryAllDeclaredMethods" : true,
+    "queryAllPublicMethods" : true,
+    "allDeclaredClasses" : true,
+    "allPublicClasses" : true
+  },
+  {
+    "name":"com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  },
+  {
+    "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+    "methods":[{"name":"<init>","parameterTypes":[] }]
+  },
+  {
+    "name":"de.gothaer.glsla.oniondemo.domain.aggregates.BerechnungsVorgabe",
+    "methods":[{"name":"<init>","parameterTypes":[] }],
+    "allDeclaredFields" : true,
+    "allDeclaredMethods" : true
+  },
+  {
+    "name":"de.gothaer.glsla.oniondemo.domain.aggregates.BerechnungsErgebnis",
+    "methods":[{"name":"<init>","parameterTypes":[] }],
+    "allDeclaredFields" : true,
+    "allDeclaredMethods" : true
+  }
+]
